@@ -4,9 +4,9 @@ A simple app to track expense and income via month and year wise
 
 ## Features
 
-*Add, Edit, Delete Expense / income
-*Display Expense / Income via, list, chart and category
-~~Export Expense / Income via pdf for month and year wise~~
+- Add, Edit, Delete Expense / income
+- Display Expense / Income via, list, chart and category
+- ~~Export Expense / Income via pdf for month and year wise~~
 
 ## Development server
 
