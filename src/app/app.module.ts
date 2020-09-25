@@ -22,11 +22,20 @@ import { HeaderComponent } from './components/core/header/header.component';
 import { SidebarComponent } from './components/core/sidebar/sidebar.component';
 
 import { SigninComponent } from './components/auth/signin/signin.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
 
 import { ExportComponent } from './components/export/export.component';
 import { AboutComponent } from './components/about/about.component';
 @NgModule({
-  declarations: [AppComponent, SidebarComponent, HeaderComponent, SigninComponent, ExportComponent, AboutComponent],
+  declarations: [
+    AppComponent,
+    SidebarComponent,
+    HeaderComponent,
+    SigninComponent,
+    SignupComponent,
+    ExportComponent,
+    AboutComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
