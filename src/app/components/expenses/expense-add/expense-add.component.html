@@ -1,0 +1,62 @@
+<div class="row my-4" id="expense-add">
+  <div class="col-sm-8 col-12 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ mode }} Expense / Income</h5>
+        <form class="mt-4" autocomplete="off" [formGroup]="expenseForm" (submit)="onSubmit()" novalidate>
+          <div class="form-group">
+            <label for="type">Select type</label>
+            <select class="custom-select" id="type" name="type" formControlName="type">
+              <option value="expense">Expense</option>
+              <option value="income">Income</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="category">Select category</label>
+            <input
+              type="text"
+              class="form-control"
+              id="category"
+              (focus)="showCategory = true"
+              [formControl]="categorySearch"
+            />
+            <div class="autocomplete-items px-4" [class.show]="categorySearch.value || showCategory">
+              <ul class="list-unstyled list-group">
+                <app-expense-search-list
+                  *ngFor="let cate of filteredCategories | async | slice: 0:6"
+                  [category]="cate"
+                  (selected)="selectedCategory($event)"
+                >
+                </app-expense-search-list>
+              </ul>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="datepicker">Date</label>
+            <input type="date" class="form-control" id="datepicker" name="date" formControlName="date" />
+          </div>
+          <div class="row">
+            <div class="col-9">
+              <div class="form-group">
+                <label for="memo">Memo</label>
+                <input type="text" class="form-control" id="memo" name="memo" formControlName="memo" />
+              </div>
+            </div>
+            <div class="col-3">
+              <label for="amount">Amount</label>
+              <input type="number" class="form-control" id="amount" name="amount" formControlName="amount" />
+            </div>
+          </div>
+          <div class="form-group">
+            <ng-container *ngIf="{ loader: loader$ | async } as l">
+              <button type="submit" class="btn btn-primary" [disabled]="l.loader">
+                <i class="fa fa-spinner fa-spin fa-fw" *ngIf="l.loader"></i>
+                <span>Submit</span>
+              </button>
+            </ng-container>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

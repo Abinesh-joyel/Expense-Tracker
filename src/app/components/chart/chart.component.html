@@ -1,0 +1,36 @@
+<div id="expense-chart">
+  <ng-container
+    *ngIf="{
+      expenseList: expenseList$ | async,
+      expenseTotal: expenseTotal$ | async
+    } as expense"
+  >
+    <div class="chart mt-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            Total Expenses: <span>{{ expense.expenseTotal }}</span>
+          </h5>
+          <app-expense-chart [expenseCategory]="expense.expenseList"> </app-expense-chart>
+        </div>
+      </div>
+    </div>
+    <div class="my-3">
+      <div class="card">
+        <div class="card-body p-sm-4 p-3">
+          <h5 class="card-title text-muted">Expenses list</h5>
+          <div class="list-group">
+            <a
+              *ngFor="let exp of expense.expenseList; let i = index"
+              routerLink="/chart/{{ i }}"
+              class="list-group-item list-group-item-action border-0 px-1 py-3"
+            >
+              <app-expense-bar-list [expCategory]="exp" [maxPercentage]="maxPercentage" [dateFlag]="false">
+              </app-expense-bar-list>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

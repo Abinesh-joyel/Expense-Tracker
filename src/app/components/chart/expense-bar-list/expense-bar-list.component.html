@@ -1,0 +1,31 @@
+<div class="d-flex align-items-center">
+  <div>
+    <i class="fa fa-bus fa-lg"></i>
+  </div>
+  <div class="d-flex flex-column w-100 mx-md-4 ml-3 mr-1">
+    <div class="d-flex justify-content-between">
+      <div>
+        <span>{{ expCategory.name }}</span>
+        <span class="ml-2 text-muted">
+          <small>{{ expCategory.percentage | expensePercentage: 1 }}%</small>
+        </span>
+      </div>
+      <span class="font-weight-light">{{ expCategory.amount }}</span>
+    </div>
+    <div class="progress extend-progress">
+      <div
+        class="progress-bar"
+        [style.width.%]="expCategory.percentage"
+        role="progressbar"
+        [attr.aria-valuenow]="expCategory.percentage"
+        aria-valuemin="0"
+        [attr.aria-valuemax]="maxPercentage"
+      ></div>
+    </div>
+    <div *ngIf="dateFlag">
+      <small class="text-muted">
+        {{ expCategory.date | date: 'MM:dd:yyyy' }}
+      </small>
+    </div>
+  </div>
+</div>

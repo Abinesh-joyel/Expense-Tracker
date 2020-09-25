@@ -1,0 +1,59 @@
+<div id="expense-category-list">
+  <ng-container *ngIf="expenseList$ | async as expenseList; else noData">
+    <div class="row my-4">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ name }}</h5>
+            <p class="m-0">
+              <small class="text-muted">
+                Total:
+                {{ amount | expensePercentage: 2 }}
+              </small>
+            </p>
+            <p>
+              <small class="text-muted"> Average daily: {{ averageDaily | expensePercentage: 2 }} </small>
+            </p>
+            <div>
+              <app-expense-line-chart [expenseCategoryList]="expenseList"> </app-expense-line-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-4">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-muted">Expenses list</h5>
+            <div class="list-group">
+              <a class="list-group-item list-group-item-action border-0 px-1 py-3" *ngFor="let exp of expenseList.body">
+                <app-expense-bar-list
+                  [expCategory]="{
+                    _id: exp._id,
+                    name: exp.category.name,
+                    icon: exp.category.icon,
+                    amount: exp.amount,
+                    percentage: (exp.amount / amount) * 100,
+                    date: exp.date
+                  }"
+                  [maxPercentage]="100"
+                  [dateFlag]="true"
+                >
+                </app-expense-bar-list>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noData>
+    <div class="no-data d-flex align-items-center justify-content-center w-100">
+      <div>
+        <h3>No data available...</h3>
+      </div>
+    </div>
+  </ng-template>
+</div>

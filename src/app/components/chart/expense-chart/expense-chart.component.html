@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col">
+    <canvas
+      *ngIf="doughnutChartData.length > 0; else noData"
+      height="350"
+      baseChart
+      class="chart"
+      [data]="doughnutChartData"
+      [labels]="doughnutChartLabels"
+      [options]="doughnutOptions"
+      [colors]="doughnutChartColors"
+      [chartType]="doughnutChartType"
+    >
+    </canvas>
+    <ng-template #noData>
+      <div class="d-flex align-items-center justify-content-center chart-no-data">
+        <h3>No data available</h3>
+      </div>
+    </ng-template>
+  </div>
+</div>

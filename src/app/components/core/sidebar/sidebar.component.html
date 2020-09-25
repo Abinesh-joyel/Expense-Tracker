@@ -1,0 +1,37 @@
+<div class="app-wrapper">
+  <nav id="sidebar" [class.active]="activeState">
+    <div class="sidebar-header">
+      <h3>Money Manager</h3>
+    </div>
+    <ul class="list-unstyled components">
+      <p>Abinesh Joyel</p>
+      <li>
+        <!-- [routerLinkActiveOptions]="{ exact: true }" -->
+        <a routerLink="/expenses" routerLinkActive="active">
+          Expense
+        </a>
+      </li>
+      <li>
+        <a routerLink="/chart" routerLinkActive="active">Chart</a>
+      </li>
+      <li>
+        <a routerLink="/category" routerLinkActive="active">Categories</a>
+      </li>
+      <li>
+        <a routerLink="/export">Export</a>
+      </li>
+      <li>
+        <a routerLink="/about">About</a>
+      </li>
+    </ul>
+  </nav>
+  <div id="content" [class.active]="activeState">
+    <app-header (toggleSidebar)="activeState = !activeState"></app-header>
+    <main>
+      <div class="container-fluid">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+  <div id="overlay" (click)="activeState = !activeState"></div>
+</div>

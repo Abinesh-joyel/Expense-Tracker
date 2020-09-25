@@ -1,0 +1,39 @@
+<div id="home" class="my-4">
+  <ng-container *ngIf="{ expense: expense$ | async, expenseAmount: expenseAmount$ | async } as exp">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <app-expense-card title="Income" [value]="exp.expenseAmount.income"> </app-expense-card>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <app-expense-card title="Expenses" [value]="exp.expenseAmount.expenses"> </app-expense-card>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <app-expense-card title="Balance" [value]="exp.expenseAmount.balance"> </app-expense-card>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card mt-3" *ngFor="let exp of exp.expense">
+          <div class="card-header">
+            <div class="d-flex justify-content-between text-muted font-weight-light font-header-card">
+              <span>{{ exp.header.date | date: 'MM/dd EEE' }}</span>
+              <span>Expenses: {{ exp.header.expenses }}</span>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="list-group">
+              <a
+                class="list-group-item list-group-item-action border-0"
+                *ngFor="let expList of exp.body; trackBy: trackByFn"
+                routerLink="/expenses/detail/{{ expList._id }}"
+              >
+                <app-expenses-list [expense]="expList"></app-expenses-list>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

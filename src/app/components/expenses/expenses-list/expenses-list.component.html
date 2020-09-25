@@ -1,0 +1,11 @@
+<div class="d-flex justify-content-between" id="expense-list">
+  <div class="d-flex align-items-center flex-fill icon-memo-wrapper">
+    <span class="icon-wrapper">
+      <i [class]="'fa fa-lg fa-' + expense.category.icon"></i>
+    </span>
+    <span class="mx-2 text-truncate">{{ expense.memo }}</span>
+  </div>
+  <div>
+    <span class="text-muted font-weight-light">{{ expense.amount }}</span>
+  </div>
+</div>
