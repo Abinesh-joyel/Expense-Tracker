@@ -6,15 +6,15 @@ import { AboutComponent } from './components/about/about.component';
 const routes: Routes = [
   {
     path: 'expenses',
-    loadChildren: './components/expenses/expenses.module#ExpensesModule',
+    loadChildren: () => import('./components/expenses/expenses.module').then((m) => m.ExpensesModule),
   },
   {
     path: 'chart',
-    loadChildren: './components/chart/chart.module#ChartModule',
+    loadChildren: () => import('./components/chart/chart.module').then((m) => m.ChartModule),
   },
   {
     path: 'category',
-    loadChildren: './components/categories/categories.module#CategoriesModule',
+    loadChildren: () => import('./components/categories/categories.module').then((m) => m.CategoriesModule),
   },
   {
     path: 'export',

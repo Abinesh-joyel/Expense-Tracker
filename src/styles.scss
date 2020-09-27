@@ -7,7 +7,7 @@
 
 $primary: #7386d5;
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url(assets/css/Roboto.css);
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import '~ngx-toastr/toastr-bs4-alert';
 
@@ -126,7 +126,7 @@ body {
     right: 0;
     background-color: white;
     z-index: 99;
-    margin-top: 0.1rem;
+    margin-top: 0rem;
     &.show {
       // visibility: visible;
       display: block;

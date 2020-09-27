@@ -18,14 +18,8 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "./node_modules/font-awesome/css/font-awesome.min.css",
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets", "src/_redirects"],
+            "styles": ["./node_modules/font-awesome/css/font-awesome.min.css", "src/styles.scss"],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/popper.js/dist/umd/popper.min.js",
@@ -34,10 +28,12 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [{
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -74,26 +70,16 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "scripts": [],
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ]
+            "assets": ["src/favicon.ico", "src/assets"]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -118,9 +104,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -131,5 +115,8 @@
     "@schematics/angular:component": {
       "styleext": "scss"
     }
+  },
+  "cli": {
+    "analytics": "ccd6ae01-b13f-4ea5-bb3a-155cda336c48"
   }
 }

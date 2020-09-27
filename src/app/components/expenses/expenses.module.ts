@@ -9,21 +9,14 @@ import { ExpenseCardComponent } from './expense-card/expense-card.component';
 import { ExpensesHomeComponent } from './expenses-home/expenses-home.component';
 import { ExpenseSearchListComponent } from './expense-search-list/expense-search-list.component';
 import { SharedModule } from 'src/app/components/shared/shared.module';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { expenseReducer } from './store/expense-reducers';
-import { ExpenseEffects } from './store/expense-effects';
-
+// import { StoreModule } from '@ngrx/store';
+// import { EffectsModule } from '@ngrx/effects';
+// import { expenseReducer } from './store/expense-reducers';
+// import { ExpenseEffects } from './store/expense-effects';
+// StoreModule.forFeature('expenses', expenseReducer),
+// EffectsModule.forFeature([ExpenseEffects]),
 @NgModule({
-  imports: [
-    CommonModule,
-    ExpensesRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedModule,
-    // StoreModule.forFeature('expenses', expenseReducer),
-    // EffectsModule.forFeature([ExpenseEffects]),
-  ],
+  imports: [CommonModule, ExpensesRoutingModule, FormsModule, ReactiveFormsModule, SharedModule],
   declarations: [
     ExpensesListComponent,
     ExpenseDetailComponent,
@@ -31,7 +24,6 @@ import { ExpenseEffects } from './store/expense-effects';
     ExpenseCardComponent,
     ExpensesHomeComponent,
     ExpenseSearchListComponent,
-    // ExpenseCategoryListComponent,
   ],
   providers: [DatePipe],
 })

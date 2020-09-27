@@ -12,7 +12,7 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { ToastrModule } from 'ngx-toastr';
-import { SharedModule } from './components/shared/shared.module';
+import { ExportModule } from './components/export/export.module';
 
 import { AppEffects } from './app.effects';
 import { CategoryEffects } from './components/categories/store/category-effects';
@@ -24,18 +24,9 @@ import { SidebarComponent } from './components/core/sidebar/sidebar.component';
 import { SigninComponent } from './components/auth/signin/signin.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 
-import { ExportComponent } from './components/export/export.component';
 import { AboutComponent } from './components/about/about.component';
 @NgModule({
-  declarations: [
-    AppComponent,
-    SidebarComponent,
-    HeaderComponent,
-    SigninComponent,
-    SignupComponent,
-    ExportComponent,
-    AboutComponent,
-  ],
+  declarations: [AppComponent, SidebarComponent, HeaderComponent, SigninComponent, SignupComponent, AboutComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -48,6 +39,7 @@ import { AboutComponent } from './components/about/about.component';
     }),
     EffectsModule.forRoot([AppEffects, CategoryEffects, ExpenseEffects]),
     ToastrModule.forRoot({ timeOut: 1500 }),
+    ExportModule,
     // StoreRouterConnectingModule.forRoot()
   ],
   providers: [],
