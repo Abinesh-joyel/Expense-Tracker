@@ -12,7 +12,7 @@ import { SharedModule } from 'src/app/components/shared/shared.module';
 // import { StoreModule } from '@ngrx/store';
 // import { EffectsModule } from '@ngrx/effects';
 // import { expenseReducer } from './store/expense-reducers';
-// import { ExpenseEffects } from './store/expense-effects';
+import { ExpenseEffects } from './store/expense-effects';
 // StoreModule.forFeature('expenses', expenseReducer),
 // EffectsModule.forFeature([ExpenseEffects]),
 @NgModule({

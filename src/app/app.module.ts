@@ -21,12 +21,10 @@ import { ExpenseEffects } from './components/expenses/store/expense-effects';
 import { HeaderComponent } from './components/core/header/header.component';
 import { SidebarComponent } from './components/core/sidebar/sidebar.component';
 
-import { SigninComponent } from './components/auth/signin/signin.component';
-import { SignupComponent } from './components/auth/signup/signup.component';
-
 import { AboutComponent } from './components/about/about.component';
+import { AuthLayoutComponent } from './components/core/auth-layout/auth-layout.component';
 @NgModule({
-  declarations: [AppComponent, SidebarComponent, HeaderComponent, SigninComponent, SignupComponent, AboutComponent],
+  declarations: [AppComponent, SidebarComponent, HeaderComponent, AboutComponent, AuthLayoutComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

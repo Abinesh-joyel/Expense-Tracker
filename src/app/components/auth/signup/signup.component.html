@@ -1,3 +1,45 @@
-<p>
-  signup works!
-</p>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">SignUp</h5>
+    <form
+      autocomplete="off"
+      novalidate
+      [formGroup]="signupForm"
+      #sForm="ngForm"
+      (submit)="signupForm.valid && onSubmit()"
+    >
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="email"
+          class="form-control"
+          [class.is-invalid]="sForm.submitted && userName.invalid"
+          formControlName="email"
+          id="username"
+          name="email"
+          email
+        />
+        <div *ngIf="sForm.submitted && userName.invalid" class="invalid-feedback">
+          <div *ngIf="userName.errors.required">Please provide a email</div>
+          <div *ngIf="userName.errors.email">Please provide a valid email</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          [class.is-invalid]="sForm.submitted && password.invalid"
+          formControlName="password"
+          id="password"
+          name="password"
+        />
+        <div *ngIf="sForm.submitted && password.invalid" class="invalid-feedback">Please provide a password</div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a routerLink="/auth/signin" class="btn btn-primary ml-1" role="button">SignIn</a>
+      </div>
+    </form>
+  </div>
+</div>

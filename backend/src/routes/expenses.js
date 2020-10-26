@@ -1,5 +1,6 @@
 const express = require('express');
 const expenseController = require('../controller/expenses');
+const authCheck = require('../middleware/check-auth');
 const router = express.Router();
 
 router.post('', expenseController.createExpense);

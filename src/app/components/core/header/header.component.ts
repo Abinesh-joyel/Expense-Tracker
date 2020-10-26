@@ -8,6 +8,7 @@ import { getStartEndDate, monthIndex } from 'src/app/utils';
 import { Month } from 'src/app/utils/models';
 import { FETCH_EXPENSE } from '../../expenses/store/expense-actions';
 import { SharedService } from '../../shared/service/shared.service';
+import { AuthService } from '../../auth/service/auth.service';
 const expenseAddRouter = 'expenses/add';
 const categoryAddRouter = 'category/add';
 
@@ -25,10 +26,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
   currentIndex = new Date().getMonth();
   selectedMonth = this.months[this.currentIndex].name;
   dropDownFlag: boolean;
-  constructor(public router: Router, private store: Store<AppState>, private sharedService: SharedService) {}
+  constructor(
+    public router: Router,
+    private store: Store<AppState>,
+    private sharedService: SharedService,
+    private authService: AuthService
+  ) {
+    this.listenRouterEvents();
+  }
 
   ngOnInit() {
     this.sharedService.setExpensePeriod(this.months[this.currentIndex]);
+  }
+
+  listenRouterEvents() {
     this.routerEvents = this.router.events
       .pipe(
         filter(
@@ -65,16 +76,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   setRoute(event: any) {
-    if (event.url === '/category') {
+    const { url } = event;
+    if (url === '/category') {
       this.addRouter = categoryAddRouter;
-    } else if (event.url !== '/category' && this.addRouter !== expenseAddRouter) {
+    } else if (url !== '/category' && this.addRouter !== expenseAddRouter) {
       this.addRouter = expenseAddRouter;
     }
-    if (event.url === '/expenses' || event.url === '/chart') {
+    if (url === '/expenses' || url === '/chart' || url === '/') {
       this.dropDownFlag = true;
     } else if (this.dropDownFlag) {
       this.dropDownFlag = false;
     }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   ngOnDestroy(): void {

@@ -2,8 +2,9 @@ import { Injectable, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { AuthService } from 'src/app/components/auth/service/auth.service';
 import { tap, mergeMap, map, withLatestFrom, filter } from 'rxjs/operators';
-import { defer, merge, of, combineLatest } from 'rxjs';
+import { defer } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import {
   AddExpense,
@@ -25,6 +26,7 @@ import { ExpenseState } from './expense-reducers';
 export class ExpenseEffects {
   constructor(
     private actions$: Actions,
+    private authService: AuthService,
     private expenseService: ExpensesService,
     private toastrService: ToastrService,
     private sharedService: SharedService,
@@ -81,9 +83,20 @@ export class ExpenseEffects {
 
   @Effect({ dispatch: false })
   init$ = defer(() => {
-    return this.store.dispatch({
-      type: FETCH_EXPENSE,
-      payload: getStartEndDate(),
-    });
+    return this.authService.getAuthListener().pipe(
+      tap((res) => console.log('authstate', res)),
+      filter((authStaus) => authStaus),
+      tap(() =>
+        this.store.dispatch({
+          type: FETCH_EXPENSE,
+          payload: getStartEndDate(),
+        })
+      )
+    );
   });
+
+  // ngrxOnInitEffects() {
+  //   console.log('effects init');
+  //   return { type: FETCH_EXPENSE, payload: getStartEndDate() };
+  // }
 }
