@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store';
@@ -23,6 +23,7 @@ import { SidebarComponent } from './components/core/sidebar/sidebar.component';
 
 import { AboutComponent } from './components/about/about.component';
 import { AuthLayoutComponent } from './components/core/auth-layout/auth-layout.component';
+import { AuthInterceptor } from './components/auth/auth.interceptor';
 @NgModule({
   declarations: [AppComponent, SidebarComponent, HeaderComponent, AboutComponent, AuthLayoutComponent],
   imports: [
@@ -40,7 +41,7 @@ import { AuthLayoutComponent } from './components/core/auth-layout/auth-layout.c
     ExportModule,
     // StoreRouterConnectingModule.forRoot()
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
