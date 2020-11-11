@@ -150,5 +150,6 @@
   },
   "rulesDirectory": [
     "codelyzer"
-  ]
+  ],
+  "one-variable-per-declaration": false
 }

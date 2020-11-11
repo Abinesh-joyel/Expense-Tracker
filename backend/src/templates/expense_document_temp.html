@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-weight: 500;
+        -webkit-print-color-adjust: exact;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+      .page {
+        position: relative;
+        max-width: 800px;
+        display: block;
+        page-break-after: auto;
+      }
+      .pageHeader {
+        height: 50px;
+        padding: 10px 20px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #7386d5;
+        text-align: center;
+      }
+      .content {
+        margin: 25px 20px;
+      }
+      .top-left-content {
+        text-align: left;
+        display: inline-block;
+        width: 49%;
+      }
+      .top-right-content {
+        text-align: right;
+        display: inline-block;
+        width: 50%;
+      }
+      .period-heading {
+        font-weight: 800;
+        font-size: 20px;
+        margin-bottom: 8px;
+      }
+      .strong {
+        font-weight: 600;
+      }
+      .cross-line {
+        border: 2px solid black;
+      }
+      .table {
+        width: 100%;
+        margin-top: 20px;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      tr td {
+        padding: 3px 7px;
+      }
+      .align-right {
+        text-align: right;
+      }
+      .table-no-border {
+        border: 1px solid #fff;
+      }
+      .w-50 {
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="pageHeader">Expense Report</div>
+      <div class="content">
+        <div class="top-content">
+          <div class="top-left-content">
+            <div class="period-heading">Day Period</div>
+            <div><span class="strong">From:</span> #Date</div>
+            <div><span class="strong">To:</span> #Date</div>
+          </div>
+          <div class="top-right-content">
+            <div><span class="strong">UserName:</span> #name</div>
+            <div><span class="strong">Statement:</span> #statement</div>
+          </div>
+        </div>
+        <div class="cross-line"></div>
+        <div class="middle-content">
+          <table class="table">
+            <tr>
+              <th>Date</th>
+              <th class="w-50">Memo</th>
+              <th>Expense</th>
+            </tr>
+            <tr>
+              <td rowspan="3">01-11-2020</td>
+              <td>car</td>
+              <td class="align-right">500</td>
+            </tr>
+            <tr>
+              <td>car</td>
+              <td class="align-right">500</td>
+            </tr>
+            <tr>
+              <td>car</td>
+              <td class="align-right">500</td>
+            </tr>
+            <tr>
+              <td class="table-no-border"></td>
+              <td class="align-right table-no-border"><span class="strong">Total R.S</span></td>
+              <td class="align-right table-no-border">500</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

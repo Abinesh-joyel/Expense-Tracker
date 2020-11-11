@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('', expenseController.createExpense);
 
-router.get('', expenseController.getExpenses);
+router.get('', authCheck, expenseController.getExpenses);
 
 router.get('/:id', expenseController.getExpenseById);
 
