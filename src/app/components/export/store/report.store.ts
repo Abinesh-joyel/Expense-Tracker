@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { EMPTY, Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 import { Category, Report } from 'src/app/utils/models';
-import { CategoryService } from '../../categories/service/category.service';
+import { ReportService } from '../service/report.service';
 
 interface ReportState {
-  reports: Category[];
+  reports: Report[];
 }
 
 const initialState: ReportState = {
@@ -15,22 +15,26 @@ const initialState: ReportState = {
 
 @Injectable()
 export class ReportStore extends ComponentStore<ReportState> {
-  constructor(private categoryService: CategoryService) {
+  constructor(private reportService: ReportService) {
     super(initialState);
   }
 
-  readonly reports$: Observable<Category[]> = this.select((state) => state.reports);
+  readonly reports$: Observable<Report[]> = this.select((state) => state.reports);
 
-  readonly getReports = this.effect(() =>
-    this.categoryService.getCategories().pipe(
-      tap({
-        next: (res) => this.addReports(res.categories),
-      }),
-      catchError(() => EMPTY)
-    )
-  );
+  readonly getReports = this.effect((obs$) => {
+    return obs$.pipe(
+      switchMap(() =>
+        this.reportService.getReports().pipe(
+          tap({
+            next: (res) => this.addReports(res.data),
+          }),
+          catchError(() => EMPTY)
+        )
+      )
+    );
+  });
 
-  readonly addReports = this.updater((state, reports: Category[]) => ({
+  readonly addReports = this.updater((state, reports: Report[]) => ({
     ...state,
     reports: [...reports],
   }));

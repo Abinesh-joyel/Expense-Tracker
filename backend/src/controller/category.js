@@ -46,7 +46,7 @@ exports.createManyCategory = (req, res, next) => {
 exports.fetchCategory = (req, res, next) => {
   //console.log('fetch');
   let categories = [];
-  const list = Category.find({ type: 'expense' }, 'name icon').sort({
+  const list = Category.find({}, 'name icon type').sort({
     name: 1,
   });
   list

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ReportStore } from './store/report.store';
 @Component({
   selector: 'app-export',
@@ -12,10 +12,9 @@ export class ExportComponent implements OnInit {
   constructor(private fb: FormBuilder, private readonly reportStore: ReportStore) {}
 
   ngOnInit() {
-    // this.reportStore.getReports();
     this.exportForm = this.fb.group({
-      start: [],
-      end: [],
+      start: [null, Validators.required],
+      end: [null, Validators.required],
       format: ['pdf'],
     });
     this.reports$.subscribe((res) => {
@@ -23,5 +22,8 @@ export class ExportComponent implements OnInit {
     });
   }
 
-  onSubmit() {}
+  onSubmit() {
+    console.log(this.exportForm.value);
+    this.reportStore.getReports();
+  }
 }

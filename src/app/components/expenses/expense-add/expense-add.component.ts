@@ -103,7 +103,6 @@ export class ExpenseAddComponent implements OnInit {
   }
 
   initListenChanges() {
-    let categorySearchName = '';
     this.filteredCategories = this.categorySearch.valueChanges.pipe(
       startWith(this.categorySearch.value),
       debounceTime(200),
@@ -113,12 +112,15 @@ export class ExpenseAddComponent implements OnInit {
       // distinctUntilChanged(),
       map((value: string) => value.toLowerCase()),
       mergeMap((value: string) => {
-        categorySearchName = this.expenseForm.get('category').value.name;
+        const {
+          type,
+          category: { name: categorySearchName },
+        } = this.expenseForm.value;
         return this.categories.pipe(
           map((categories) =>
             categories.filter((category: Category) => {
               const categoryName = category.name.toLowerCase();
-              return categoryName.startsWith(value) && categorySearchName !== value;
+              return categoryName.startsWith(value) && categorySearchName !== value && category.type === type;
             })
           )
         );

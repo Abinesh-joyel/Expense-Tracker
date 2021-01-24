@@ -13,7 +13,7 @@ const reportSchema = mongoose.Schema({
     type: Date,
     required: true,
   },
-  type: {
+  format: {
     type: String,
     enum: ['pdf', 'csv'],
     required: true,
