@@ -9,8 +9,14 @@ const authRoutes = require('./src/routes/user');
 
 const app = express();
 
+// mongodb local
+const dbLink = 'mongodb://127.0.0.1:27017/express-tracker';
+
+// mongodb Atlas
+// const dbLink = 'mongodb+srv://abineshjoyel:<password>@cluster0.cqbau.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
 mongoose
-  .connect('mongodb://127.0.0.1:27017/express-tracker')
+  .connect(dbLink)
   .then(() => {
     console.log('connected to database');
   })
