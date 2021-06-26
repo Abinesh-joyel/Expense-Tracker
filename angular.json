@@ -11,7 +11,7 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/money-manager",
             "index": "src/index.html",
@@ -25,6 +25,7 @@
               "./node_modules/popper.js/dist/umd/popper.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.min.js"
             ],
+            "indexTransform": "./index-html-transform.js",
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,

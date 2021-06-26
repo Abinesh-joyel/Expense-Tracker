@@ -10,18 +10,24 @@ const authRoutes = require('./src/routes/user');
 const app = express();
 
 // mongodb local
-const dbLink = 'mongodb://127.0.0.1:27017/express-tracker';
+// const dbLink = 'mongodb://127.0.0.1:27017/expense-tracker';
 
 // mongodb Atlas
-// const dbLink = 'mongodb+srv://abineshjoyel:<password>@cluster0.cqbau.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const dbLink = 'mongodb://abineshjoyel:Abin2211@cluster0-shard-00-00.cqbau.mongodb.net:27017,cluster0-shard-00-01.cqbau.mongodb.net:27017,cluster0-shard-00-02.cqbau.mongodb.net:27017/expense-tracker?ssl=true&replicaSet=atlas-104rpu-shard-0&authSource=admin&retryWrites=true&w=majority';
+
+const connectionParams = {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true
+}
 
 mongoose
-  .connect(dbLink)
+  .connect(dbLink, connectionParams)
   .then(() => {
     console.log('connected to database');
   })
-  .catch(() => {
-    console.log('error in connecting db');
+  .catch((e) => {
+    console.log('error in connecting db', e);
   });
 
 app.use(bodyParser.json());
