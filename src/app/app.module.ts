@@ -24,6 +24,7 @@ import { SidebarComponent } from './components/core/sidebar/sidebar.component';
 import { AboutComponent } from './components/about/about.component';
 import { AuthLayoutComponent } from './components/core/auth-layout/auth-layout.component';
 import { AuthInterceptor } from './components/auth/auth.interceptor';
+import { ServiceWorkerModule } from '@angular/service-worker';
 @NgModule({
   declarations: [AppComponent, SidebarComponent, HeaderComponent, AboutComponent, AuthLayoutComponent],
   imports: [
@@ -39,6 +40,12 @@ import { AuthInterceptor } from './components/auth/auth.interceptor';
     EffectsModule.forRoot([AppEffects, CategoryEffects, ExpenseEffects]),
     ToastrModule.forRoot({ timeOut: 1500 }),
     ExportModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
     // StoreRouterConnectingModule.forRoot()
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],

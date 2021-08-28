@@ -20,7 +20,7 @@ import {
 } from './expense-actions';
 import { ExpensesService } from '../service/expenses.service';
 import { SharedService } from '../../shared/service/shared.service';
-import { getStartEndDate } from 'src/app/utils';
+import { getStartEndDate, monthIndex } from 'src/app/utils';
 import { ExpenseState } from './expense-reducers';
 @Injectable()
 export class ExpenseEffects {
@@ -54,7 +54,8 @@ export class ExpenseEffects {
     ofType<FetchExpense>(FETCH_EXPENSE),
     mergeMap((action: FetchExpense) => this.expenseService.getExpenses(action.payload)),
     tap((res) => {
-      this.toastrService.success(`Listing Expense and Income for the month ${res.month}`, `Expense - ${res.month}`);
+      const { fullName } = monthIndex()[res.month];
+      this.toastrService.success(`Listing Expense and Income for the month ${fullName}`, `Expense - ${fullName}`);
     }),
     map((res) => new ListExpense(res.data))
   );
