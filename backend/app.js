@@ -13,7 +13,8 @@ const app = express();
 // const dbLink = 'mongodb://127.0.0.1:27017/expense-tracker';
 
 // mongodb Atlas
-const dbLink = 'mongodb://abineshjoyel:Abin2211@cluster0-shard-00-00.cqbau.mongodb.net:27017,cluster0-shard-00-01.cqbau.mongodb.net:27017,cluster0-shard-00-02.cqbau.mongodb.net:27017/expense-tracker?ssl=true&replicaSet=atlas-104rpu-shard-0&authSource=admin&retryWrites=true&w=majority';
+const dbLink =  "mongodb+srv://abineshjoyel:Abin2211@cluster0.cqbau.mongodb.net/?retryWrites=true&w=majority"
+
 
 const connectionParams = {
   useNewUrlParser: true,
