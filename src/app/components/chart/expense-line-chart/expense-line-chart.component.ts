@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, BaseChartDirective } from 'ng2-charts';
+import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { getMonthName } from 'src/app/utils';
 import { ExpenseCategory, Expense } from 'src/app/utils/models';
 
@@ -10,16 +9,20 @@ import { ExpenseCategory, Expense } from 'src/app/utils/models';
   styleUrls: ['./expense-line-chart.component.scss'],
 })
 export class ExpenseLineChartComponent {
-  lineChartData: ChartDataSets[];
-  lineChartLabels: number[] = [];
-  lineChartOptions: ChartOptions = {
+  lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: true,
-    legend: {
-      display: true,
-      position: 'bottom',
-    },
+    plugins: {
+      legend: {
+        display: true,
+        position: 'bottom',
+      }
+    }
   };
+  lineChartData: ChartConfiguration<'line'>['data'] = {
+    labels: [],
+    datasets: [],
+  }
   lineChartLegend = true;
   lineChartType = 'line';
   @Input() set expenseCategoryList(exp: { header: ExpenseCategory; body: Expense[] }) {
@@ -41,7 +44,7 @@ export class ExpenseLineChartComponent {
       }
     );
     const { data, chartLabels } = expense;
-    this.lineChartData = [{ data, label }];
-    this.lineChartLabels = chartLabels;
+    this.lineChartData.datasets = [{ data, label }];
+    this.lineChartData.labels = chartLabels;
   }
 }

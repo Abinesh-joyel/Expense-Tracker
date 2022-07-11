@@ -1,13 +1,12 @@
 <div class="row">
   <div class="col">
     <canvas
-      *ngIf="lineChartData[0].data.length > 0; else noData"
+      *ngIf="lineChartData.datasets[0]?.data?.length > 0; else noData"
       baseChart
-      [datasets]="lineChartData"
-      [labels]="lineChartLabels"
+      [data]="lineChartData"
       [options]="lineChartOptions"
       [legend]="lineChartLegend"
-      [chartType]="lineChartType"
+      [type]="lineChartType"
     >
     </canvas>
     <ng-template #noData>

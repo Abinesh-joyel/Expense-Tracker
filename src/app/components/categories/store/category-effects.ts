@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, createEffect } from '@ngrx/effects';
 import { defer, of } from 'rxjs';
 import { AppState } from 'src/app/store';
 import { ListCategory } from './category-actions';
@@ -15,8 +15,8 @@ export class CategoryEffects {
     private categoryService: CategoryService
   ) {}
 
-  @Effect()
-  init$ = defer(() => {
+  
+  init$ = createEffect(() => defer(() => {
     return this.categoryService.getCategories().pipe(
       tap((res) => {
         console.log(res);
@@ -25,5 +25,5 @@ export class CategoryEffects {
         of(new ListCategory({ categories: categories.categories }))
       )
     );
-  });
+  }));
 }

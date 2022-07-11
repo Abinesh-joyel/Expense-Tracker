@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ChartOptions } from 'chart.js';
+import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { ExpenseCategory } from 'src/app/utils/models';
 import { chartColors } from 'src/app/utils';
 
@@ -9,27 +9,25 @@ import { chartColors } from 'src/app/utils';
   styleUrls: ['./expense-chart.component.scss'],
 })
 export class ExpenseChartComponent {
-  doughnutChartColors: any[] = [
-    {
-      backgroundColor: [...chartColors],
-    },
-  ];
-  doughnutChartData: number[];
-  doughnutChartLabels: string[];
-  doughnutChartType = 'doughnut';
-  doughnutOptions: ChartOptions = Object.assign({
-    legend: {
-      display: true,
-      position: 'bottom',
+  pieChartOptions: ChartOptions<'pie'> = {
+    plugins: {
+      legend: {
+        display: true,
+        position: 'bottom',
+      }
     },
     elements: {
       arc: {
         borderWidth: 0,
       },
     },
-    responsive: true,
+    responsive: false,
     maintainAspectRatio: false,
-  });
+  };
+  pieChartLabels = [];
+  pieChartDatasets = [];
+  pieChartLegend = true;
+  chartType = 'pie';
 
   @Input() set expenseCategory(expCat: ExpenseCategory[]) {
     this.onInit(expCat);
@@ -45,7 +43,8 @@ export class ExpenseChartComponent {
       },
       { amount: [], labels: [] }
     );
-    this.doughnutChartData = exp.amount;
-    this.doughnutChartLabels = exp.labels;
+    console.log('exp', exp);
+    this.pieChartDatasets = [{ data: exp.amount }];
+    this.pieChartLabels = exp.labels;
   }
 }
